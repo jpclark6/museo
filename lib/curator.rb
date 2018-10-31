@@ -65,19 +65,22 @@ class Curator
       [photo.year.to_i - artist.born.to_i, photo.name]
     end
     create_age_and_photo_name_hash(age_and_photo_array)
-
   end
 
   def create_age_and_photo_name_hash(age_photos)
     age_photo_hash = {}
     age_photos.each do |age, photo_name|
-      if age_photo_hash.has_key? age
+      if age_has_photo?(age_photo_hash, age)
         age_photo_hash[age] = "'age_photo_hash[age]', '#{photo_name}'"
       else
         age_photo_hash[age] = photo_name
       end
     end
     age_photo_hash
+  end
+
+  def age_has_photo?(age_photo_hash, age)
+    age_photo_hash.has_key? age
   end
 
 end
